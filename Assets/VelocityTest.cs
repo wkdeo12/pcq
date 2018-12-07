@@ -6,57 +6,78 @@ using HTC.UnityPlugin.Vive;
 
 public class VelocityTest : MonoBehaviour
 {
-    public Transform player;
-    public Transform camera;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform camera;
 
-    public HandRole handRole;
-    public ControllerButton controllerButton = ControllerButton.Trigger;
-    public Rigidbody rid;
+    [SerializeField] private HandRole leftHandRole;
+    [SerializeField] private HandRole rightHandRole;
+    [SerializeField] private ControllerButton triggerButton = ControllerButton.Trigger;
 
-    public Vector3 lastPos;
-    public Vector3 punchDirection;
-    public Vector3 pos;
-    public Quaternion rot;
+    private Vector3 lastLeftPos;
+    private Vector3 curLeftPos;
+    private Vector3 lastRightPos;
+    private Vector3 curRightPos;
+    private Vector3 leftPunchDirection;
+    private Vector3 rightPunchDirection;
 
-    public Transform righthand;
+    private Quaternion leftRot;
+    private Quaternion rightRot;
 
-    public float threshold = 2.25f;
-    public float momentum;
-    public bool runTrigger;
-    public bool punchTrigger;
-    public float moveSpeed;
+    public Transform leftHand;
+    public Transform rightHand;
 
-    public float moveTime = 1.5f;
-
-    public Vector3 moveVector;
+    [SerializeField] private float threshold = 2f;
+    [SerializeField] private float leftMomentum;
+    [SerializeField] private float rightMomentum;
+    [SerializeField] private bool runTrigger;
+    [SerializeField] private bool leftPunchTrigger;
+    [SerializeField] private bool rightPunchTrigger;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveTime = 1.5f;
 
     private Collider punchCollider;
 
     // Use this for initialization
     private void Start()
     {
-        lastPos = VivePose.GetPose(handRole).pos;
+        lastLeftPos = VivePose.GetPose(leftHandRole).pos;
+        lastRightPos = VivePose.GetPose(rightHandRole).pos;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        pos = VivePose.GetPose(handRole).pos;
+        curLeftPos = VivePose.GetPose(leftHandRole).pos;
+        curRightPos = VivePose.GetPose(rightHandRole).pos;
 
-        punchDirection = (pos - lastPos);
-        momentum = punchDirection.magnitude / Time.deltaTime;
+        leftPunchDirection = (curLeftPos - lastLeftPos);
+        rightPunchDirection = (curRightPos - lastRightPos);
+
+        leftMomentum = leftPunchDirection.magnitude / Time.deltaTime;
+        rightMomentum = rightPunchDirection.magnitude / Time.deltaTime;
+
         //Debug.Log("velocity = " + momentum);
 
-        if (ViveInput.GetPress(handRole, controllerButton) && momentum > threshold)
+        if (ViveInput.GetPress(leftHandRole, triggerButton) && leftMomentum > threshold)
         {
-            punchTrigger = true;
+            leftPunchTrigger = true;
         }
         else
         {
-            punchTrigger = false;
+            leftPunchTrigger = false;
         }
 
-        if (!ViveInput.GetPress(handRole, controllerButton) && momentum > threshold)
+        if (ViveInput.GetPress(rightHandRole, triggerButton) && rightMomentum > threshold)
+        {
+            rightPunchTrigger = true;
+        }
+        else
+        {
+            rightPunchTrigger = false;
+        }
+
+        if ((!ViveInput.GetPress(leftHandRole, triggerButton) && leftMomentum > threshold) ||
+            (!ViveInput.GetPress(rightHandRole, triggerButton) && rightMomentum > threshold))
         {
             runTrigger = true;
         }
@@ -69,17 +90,20 @@ public class VelocityTest : MonoBehaviour
         {
             StartCoroutine("MoveForwardCoroutine");
             runTrigger = false;
-            //player.Translate(camera.transform.forward * Time.deltaTime * moveSpeed);
-            //player.Translate(moveVector);
         }
 
-        if (punchTrigger)
+        if (leftPunchTrigger)
         {
-            StartCoroutine("MoveForwardCoroutine");
-            StartCoroutine("PunchCoroutine");
+            StartCoroutine("LeftPunchCoroutine");
         }
 
-        lastPos = pos;
+        if (rightPunchTrigger)
+        {
+            StartCoroutine("RightPunchCoroutine");
+        }
+
+        lastLeftPos = curLeftPos;
+        lastRightPos = curRightPos;
     }
 
     private IEnumerator MoveForwardCoroutine()
@@ -88,19 +112,25 @@ public class VelocityTest : MonoBehaviour
         while (timer < moveTime)
         {
             timer += Time.deltaTime;
-            //moveVector = camera.transform.forward * Time.deltaTime * moveSpeed
-            player.Translate(camera.transform.forward * Time.deltaTime * moveSpeed);
+            Vector3 direction = new Vector3(camera.transform.forward.x, 0, camera.transform.forward.z);
+            player.Translate(direction * Time.deltaTime * moveSpeed);
             yield return null;
         }
     }
 
-    private IEnumerator PunchCoroutine()
+    private IEnumerator LeftPunchCoroutine()
     {
-        var punches = FindObjectsOfType<AttackCollider>();
-        punches[0].gameObject.GetComponent<Collider>().isTrigger = false;
-        punches[1].gameObject.GetComponent<Collider>().isTrigger = false;
-        yield return new WaitForSeconds(0.25f);
-        punches[0].gameObject.GetComponent<Collider>().isTrigger = true;
-        punches[1].gameObject.GetComponent<Collider>().isTrigger = true;
+        Collider punch = leftHand.GetComponentInChildren<AttackCollider>().gameObject.GetComponent<Collider>();
+        punch.isTrigger = false;
+        yield return new WaitForSeconds(0.5f);
+        punch.isTrigger = true;
+    }
+
+    private IEnumerator RightPunchCoroutine()
+    {
+        Collider punch = rightHand.GetComponentInChildren<AttackCollider>().gameObject.GetComponent<Collider>();
+        punch.isTrigger = false;
+        yield return new WaitForSeconds(0.5f);
+        punch.isTrigger = true;
     }
 }
