@@ -72,6 +72,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4474494540953236}
   - component: {fileID: 114473897670902356}
+  - component: {fileID: 136817986997717286}
+  - component: {fileID: 54062225702755642}
   m_Layer: 0
   m_Name: ViveCameraRig_Player
   m_TagString: Untagged
@@ -272,7 +274,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1314116024773440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4370338010615284}
@@ -418,6 +420,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!54 &54062225702755642
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1314116024773440}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!81 &81118675196531230
 AudioListener:
   m_ObjectHideFlags: 1
@@ -615,21 +632,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 4474494540953236}
   camera: {fileID: 4370338010615284}
-  handRole: 0
-  controllerButton: 0
-  rid: {fileID: 0}
-  lastPos: {x: 0, y: 0, z: 0}
-  punchDirection: {x: 0, y: 0, z: 0}
-  pos: {x: 0, y: 0, z: 0}
-  rot: {x: 0, y: 0, z: 0, w: 0}
-  righthand: {fileID: 4449092049298804}
-  threshold: 2.25
-  momentum: 0
+  leftHandRole: 1
+  rightHandRole: 0
+  leftHand: {fileID: 4751904841156280}
+  rightHand: {fileID: 4449092049298804}
+  threshold: 1.8
+  leftMomentum: 0
+  rightMomentum: 0
   runTrigger: 0
-  punchTrigger: 0
-  moveSpeed: 0.5
+  leftPunchTrigger: 0
+  rightPunchTrigger: 0
+  rightJumpTrigger: 0
+  moveSpeed: 0.25
   moveTime: 1.5
-  moveVector: {x: 0, y: 0, z: 0}
+  jumpPower: 150
 --- !u!114 &114623847786306606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -766,3 +782,16 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1178033101535828}
   m_Enabled: 1
+--- !u!136 &136817986997717286
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1314116024773440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
