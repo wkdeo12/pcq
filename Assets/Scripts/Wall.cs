@@ -7,17 +7,20 @@ public class Wall : MonoBehaviour
     private Rigidbody rb;
     public ParticleSystem punchparticle;
 
+    [SerializeField]
+    public Vector3 kkb;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // Flyaway(new Vector3(0, 1, 0));
+        Flyaway(kkb);
     }
 
     private void Update()
     {
     }
 
-    private void Flyaway(Vector3 punchvelocity)
+    public void Flyaway(Vector3 punchvelocity)
     {
         ParticleSystem particle = ParticlePool.instance.GetParticle();
 
