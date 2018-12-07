@@ -41,6 +41,6 @@ MonoBehaviour:
   m_waveVRVirtualWristRestPosition: {x: 0, y: 0, z: 0.35}
   m_waveVRVirtualHandRestPosition: {x: 0, y: 0, z: 0.05}
   m_activateSimulatorModule: 1
-  m_activateUnityNativeVRModule: 1
-  m_activateSteamVRModule: 1
+  m_activateUnityNativeVRModule: 0
+  m_activateSteamVRModule: 0
   m_activateOculusVRModule: 1
