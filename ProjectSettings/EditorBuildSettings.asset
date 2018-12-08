@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/KeunIlNam 2.unity
+    guid: b636871ee46cbaf4eafc3388f9653166
   m_configObjects: {}

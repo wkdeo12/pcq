@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aecfd4997eae89b4bb46c948d7113470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
   isMoving: 1
   hp: 1
   particleSystem: {fileID: 0}

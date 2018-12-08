@@ -39,6 +39,7 @@ public class EnemyVehicle : MonoBehaviour//, IColliderEventHoverEnterHandler
     {
         isMoving = false;
         this.transform.tag = "Bomb";
+        GetComponent<Rigidbody>().useGravity = true;
     }
 
     private void OnCollisionEnter(Collision other)
