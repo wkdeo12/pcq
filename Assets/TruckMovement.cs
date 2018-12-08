@@ -23,6 +23,23 @@ public class TruckMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var rr = other.transform.GetChild(1);
+        if(other.transform.tag == "RightHand" || other.transform.tag == "LeftHand")
+        {
+            moveSpeed = 0;
+            StartCoroutine(Die(90));
+        }
+    }
+
+    private IEnumerator Die(int a)
+    {
+        while(a > 0)
+        {
+            transform.Translate(-50 * Time.deltaTime, 90 * Time.deltaTime, 10 * Time.deltaTime);
+            transform.Rotate(10, -5, 0);
+            yield return null;
+            a--;
+        }
+        Destroy(this.gameObject);
+        yield return new WaitForSeconds(1f);
     }
 }

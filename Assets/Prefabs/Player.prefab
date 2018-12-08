@@ -2057,16 +2057,16 @@ MonoBehaviour:
   rightHandRole: 0
   leftPunchDirection: {x: 0, y: 0, z: 0}
   rightPunchDirection: {x: 0, y: 0, z: 0}
-  leftHand: {fileID: 4694775412098110}
-  rightHand: {fileID: 4405348106137364}
+  leftHand: {fileID: 4660225261990922}
+  rightHand: {fileID: 4243804127370606}
   feetPos: {fileID: 0}
-  threshold: 3
+  threshold: 2
   leftMomentum: 0
   rightMomentum: 0
   moveSpeed: 0.25
   moveTime: 1.5
   jumpPower: 150
-  isGrounded: 0
+  isGrounded: 1
 --- !u!114 &114517711087861402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2600,8 +2600,7 @@ LineRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 2100000, guid: 2807c77f22a845e4f9765e00034f4446, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
