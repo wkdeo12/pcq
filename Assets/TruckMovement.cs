@@ -5,7 +5,7 @@ using UnityEngine;
 public class TruckMovement : MonoBehaviour
 {
     private Rigidbody rb;
-    public float moveSpeed = 40f;
+    public float moveSpeed = 10f;
     private Vector3 dir;
 
     private void Start()
