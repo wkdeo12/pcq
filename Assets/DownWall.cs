@@ -2,30 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour
+public class DownWall : MonoBehaviour
 {
-    private Rigidbody rb;
-
-    [SerializeField]
-    public Vector3 kkb;
+    public Transform ground;
+    public float distance;
+    public float stopdis;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        Flyaway(kkb);
     }
 
+    // Update is called once per frame
     private void Update()
     {
-    }
+        if(this.transform.position.y - ground.transform.position.y < 3)
+        {
+            return;
+        }
 
-    public void Flyaway(Vector3 punchvelocity)
-    {
-        ParticleSystem particle = ParticlePool.instance.GetParticle();
-        particle.transform.position = this.transform.position;
-        particle.Play();
-
-        rb.velocity = punchvelocity;
+        this.transform.Translate(0, -30 * Time.deltaTime, 0);
     }
 
     private void OnTriggerEnter(Collider other)

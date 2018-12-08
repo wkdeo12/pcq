@@ -17,8 +17,8 @@ public class VelocityTest : MonoBehaviour
     private Vector3 curLeftPos;
     private Vector3 lastRightPos;
     private Vector3 curRightPos;
-    private Vector3 leftPunchDirection;
-    private Vector3 rightPunchDirection;
+    public Vector3 leftPunchDirection;
+    public Vector3 rightPunchDirection;
 
     private Quaternion leftRot;
     private Quaternion rightRot;
@@ -58,7 +58,7 @@ public class VelocityTest : MonoBehaviour
 
         //Debug.Log("velocity = " + momentum);
 
-        if (ViveInput.GetPress(leftHandRole, triggerButton) && leftMomentum > threshold)
+        if(ViveInput.GetPress(leftHandRole, triggerButton) && leftMomentum > threshold)
         {
             leftPunchTrigger = true;
         }
@@ -67,7 +67,7 @@ public class VelocityTest : MonoBehaviour
             leftPunchTrigger = false;
         }
 
-        if (ViveInput.GetPress(rightHandRole, triggerButton) && rightMomentum > threshold)
+        if(ViveInput.GetPress(rightHandRole, triggerButton) && rightMomentum > threshold)
         {
             rightPunchTrigger = true;
         }
@@ -76,7 +76,7 @@ public class VelocityTest : MonoBehaviour
             rightPunchTrigger = false;
         }
 
-        if ((!ViveInput.GetPress(leftHandRole, triggerButton) && leftMomentum > threshold) ||
+        if((!ViveInput.GetPress(leftHandRole, triggerButton) && leftMomentum > threshold) ||
             (!ViveInput.GetPress(rightHandRole, triggerButton) && rightMomentum > threshold))
         {
             runTrigger = true;
@@ -86,18 +86,18 @@ public class VelocityTest : MonoBehaviour
             runTrigger = false;
         }
 
-        if (runTrigger)
+        if(runTrigger)
         {
             StartCoroutine("MoveForwardCoroutine");
             runTrigger = false;
         }
 
-        if (leftPunchTrigger)
+        if(leftPunchTrigger)
         {
             StartCoroutine("LeftPunchCoroutine");
         }
 
-        if (rightPunchTrigger)
+        if(rightPunchTrigger)
         {
             StartCoroutine("RightPunchCoroutine");
         }
@@ -109,7 +109,7 @@ public class VelocityTest : MonoBehaviour
     private IEnumerator MoveForwardCoroutine()
     {
         float timer = 0f;
-        while (timer < moveTime)
+        while(timer < moveTime)
         {
             timer += Time.deltaTime;
             Vector3 direction = new Vector3(camera.transform.forward.x, 0, camera.transform.forward.z);
