@@ -19,8 +19,8 @@ public class PlayerInput : MonoBehaviour
     private Vector3 lastRightPos;
     private Vector3 curRightPos;
 
-    private Vector3 leftPunchDirection;
-    private Vector3 rightPunchDirection;
+    public Vector3 leftPunchDirection;
+    public Vector3 rightPunchDirection;
 
     private Quaternion leftRot;
     private Quaternion rightRot;
@@ -83,6 +83,7 @@ public class PlayerInput : MonoBehaviour
         if ((!ViveInput.GetPress(leftHandRole, triggerButton) && leftMomentum > threshold) ||
             (!ViveInput.GetPress(rightHandRole, triggerButton) && rightMomentum > threshold))
         {
+            Debug.Log("Run");
             StartCoroutine("MoveForwardCoroutine");
         }
     }
@@ -91,11 +92,13 @@ public class PlayerInput : MonoBehaviour
     {
         if (ViveInput.GetPress(leftHandRole, triggerButton) && leftMomentum > threshold && Vector3.Angle(leftPunchDirection, Vector3.up) < 45)
         {
+            Debug.Log("LeftJump");
             rb.AddForce(Vector3.up * jumpPower);
         }
 
         if (ViveInput.GetPress(rightHandRole, triggerButton) && rightMomentum > threshold && Vector3.Angle(rightPunchDirection, Vector3.up) < 45)
         {
+            Debug.Log("RightJump");
             rb.AddForce(Vector3.up * jumpPower);
         }
     }
@@ -104,11 +107,13 @@ public class PlayerInput : MonoBehaviour
     {
         if (ViveInput.GetPress(leftHandRole, triggerButton) && leftMomentum > threshold)
         {
+            Debug.Log("LeftPunch");
             StartCoroutine("LeftPunchCoroutine");
         }
 
         if (ViveInput.GetPress(rightHandRole, triggerButton) && rightMomentum > threshold)
         {
+            Debug.Log("RightPunch");
             StartCoroutine("RightPunchCoroutine");
         }
     }
