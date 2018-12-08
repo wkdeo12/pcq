@@ -71,7 +71,7 @@ public class PlayerInput : MonoBehaviour
         rightMomentum = rightPunchDirection.magnitude / Time.deltaTime;
 
         CheckPunch();
-        CheckJump();
+        //CheckJump();
         CheckRun();
 
         lastLeftPos = curLeftPos;

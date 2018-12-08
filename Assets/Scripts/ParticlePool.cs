@@ -6,9 +6,9 @@ public class ParticlePool : MonoBehaviour
 {
     public static ParticlePool instance;
 
-    private List<ParticleSystem> particles;
-    private IEnumerator<ParticleSystem> particlesIterator;
-    public ParticleSystem particlePrafab;
+    private List<GameObject> particles;
+    private IEnumerator<GameObject> particlesIterator;
+    public GameObject particlePrafab;
 
     public int count = 20;
 
@@ -18,7 +18,7 @@ public class ParticlePool : MonoBehaviour
         Setup();
     }
 
-    public ParticleSystem GetParticle()
+    public GameObject GetParticle()
     {
         // 다음 순번 아이템으로 커서를 넘기기 시도
         if (!particlesIterator.MoveNext())
@@ -33,11 +33,11 @@ public class ParticlePool : MonoBehaviour
 
     public void Setup()
     {
-        particles = new List<ParticleSystem>();
+        particles = new List<GameObject>();
 
         for (int i = 0; i < count; i++)
         {
-            var particle = Instantiate<ParticleSystem>(particlePrafab, transform);
+            var particle = Instantiate(particlePrafab, transform);
             particles.Add(particle);
         }
 

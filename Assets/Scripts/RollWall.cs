@@ -17,12 +17,12 @@ public class RollWall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.tag == "RightHand" || collision.transform.tag == "LeftHand")
+        if (collision.transform.tag == "RightHand" || collision.transform.tag == "LeftHand")
         {
-            ParticleSystem particle = ParticlePool.instance.GetParticle();
-            particle.transform.position = this.transform.position;
-            particle.Play();
-            Destroy(this.gameObject);
+            //ParticleSystem particle = ParticlePool.instance.GetParticle();
+            //particle.transform.position = this.transform.position;
+            //particle.Play();
+            //Destroy(this.gameObject);
         }
     }
 }

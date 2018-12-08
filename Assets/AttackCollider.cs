@@ -10,5 +10,6 @@ public class AttackCollider : MonoBehaviour
         {
             collision.gameObject.GetComponent<particleman>().ParticleON();
         }
+        Debug.Log(collision.gameObject.name);
     }
 }

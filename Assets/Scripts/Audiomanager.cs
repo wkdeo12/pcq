@@ -4,43 +4,44 @@ using UnityEngine;
 
 public class Audiomanager : MonoBehaviour
 {
-
     public AudioClip[] audioClips;
-    AudioSource audioSource;
+    private AudioSource audioSource;
     public AudioClip loudsound;
     public AudioClip mainTheme;
-    AudioClip randomAud;
-  
+    private AudioClip randomAud;
+    public static Audiomanager audiosingle;
 
-   
+    private void Awake()
+    {
+        audiosingle = this;
+    }
+
     // Use this for initialization
-    void Start ()
+    private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         randomAud = GetComponent<AudioClip>();
         //mainTheme = GetComponent<Audiomanager>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    
-    void PlayAudio()
-    {
+    }
 
-        if (/*일반 충돌 조건 만족*/true)
+    // Update is called once per frame
+    private void Update()
+    {
+    }
+
+    public void PlayAudio(int q)
+    {
+        if (q == 1)
         {
             audioSource.clip = audioClips[Random.Range(0, 6)];
             randomAud = audioSource.clip;
             audioSource.PlayOneShot(randomAud);
         }
-        else if (/*대형 버스 충돌 조건 만족*/ true)
+        else if (q == 2)
         {
             audioSource.PlayOneShot(loudsound);
-            audioSource.play
+            audioSource.Play();
         }
-
     }
 
     //게임 시작 버튼에 옮길 코드
@@ -49,9 +50,4 @@ public class Audiomanager : MonoBehaviour
 
     //Audiomanager mainThemePlay = new Audiomanager();
     //mainThemePlay.audioSource.Play(mainThemePlay.mainTheme);
-
-    
-
-
-
 }

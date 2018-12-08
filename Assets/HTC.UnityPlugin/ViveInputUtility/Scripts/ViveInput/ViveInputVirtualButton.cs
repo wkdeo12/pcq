@@ -21,6 +21,7 @@ namespace HTC.UnityPlugin.Vive
         public class InputEntry
         {
             public ViveRoleProperty viveRole = ViveRoleProperty.New(HandRole.RightHand);
+
             [CustomOrderedEnum]
             public ControllerButton button = ControllerButton.Trigger;
         }
@@ -37,18 +38,25 @@ namespace HTC.UnityPlugin.Vive
 
         [SerializeField]
         private InputsOperatorEnum m_combineInputsOperator = InputsOperatorEnum.Or;
+
         [SerializeField]
         private List<InputEntry> m_inputs = new List<InputEntry>();
+
         [SerializeField]
         private OutputEvent m_onVirtualPress = new OutputEvent();
+
         [SerializeField]
         private OutputEvent m_onVirtualClick = new OutputEvent();
+
         [SerializeField]
         private OutputEvent m_onVirtualPressDown = new OutputEvent();
+
         [SerializeField]
         private OutputEvent m_onVirtualPressUp = new OutputEvent();
+
         [SerializeField]
         private List<GameObject> m_toggleGameObjectOnVirtualClick = new List<GameObject>();
+
         [SerializeField]
         private List<Behaviour> m_toggleComponentOnVirtualClick = new List<Behaviour>();
 
@@ -77,6 +85,7 @@ namespace HTC.UnityPlugin.Vive
         private bool isUp { get { return m_prevPressState && !m_currPressState; } }
 
 #if UNITY_EDITOR
+
         private void Reset()
         {
             m_inputs.Add(new InputEntry()
@@ -85,6 +94,7 @@ namespace HTC.UnityPlugin.Vive
                 button = ControllerButton.Trigger,
             });
         }
+
 #endif
 
         private void UpdateState()
@@ -112,6 +122,7 @@ namespace HTC.UnityPlugin.Vive
                     }
 
                     break;
+
                 case InputsOperatorEnum.And:
 
                     m_currPressState = true;
@@ -273,7 +284,7 @@ namespace HTC.UnityPlugin.Vive
 
             m_prevPressState = false;
         }
-        
+
         public bool GetVirtualPress()
         {
             UpdateState();

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - WALL
   - RightHand
+  - Enemy
+  - Bomb
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - Enemy
   - 
   - 
   - 

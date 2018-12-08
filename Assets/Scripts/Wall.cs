@@ -21,23 +21,23 @@ public class Wall : MonoBehaviour
 
     public void Flyaway(Vector3 punchvelocity)
     {
-        ParticleSystem particle = ParticlePool.instance.GetParticle();
-        particle.transform.position = this.transform.position;
-        particle.Play();
+        //ParticleSystem particle = ParticlePool.instance.GetParticle();
+        //particle.transform.position = this.transform.position;
+        //particle.Play();
 
-        rb.velocity = punchvelocity;
+        //rb.velocity = punchvelocity;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag == "RightHand" || other.transform.tag == "LeftHand")
+        if (other.transform.tag == "RightHand" || other.transform.tag == "LeftHand")
         {
             //Vector3 velocity = other.transform.parent.GetComponent<VelocityTest>().leftPunchDirection;
             //Flyaway(velocity);
-            ParticleSystem particle = ParticlePool.instance.GetParticle();
-            particle.transform.position = other.transform.position;
-            particle.Play();
-            Destroy(this.gameObject);
+            //ParticleSystem particle = ParticlePool.instance.GetParticle();
+            //particle.transform.position = other.transform.position;
+            //particle.Play();
+            //Destroy(this.gameObject);
         }
     }
 }
